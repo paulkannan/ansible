@@ -18,3 +18,19 @@
         - mysql-server
         - mysql-client
         
+    - name: Start mysql
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+    
+    - name: Create App database
+      mysql_db: name=emp_db state=present
+      
+    - name: Create db user
+      mysql_user: 
+        name: db_user
+        password: 12345
+        priv: '*.*:ALL'
+        state: present
+        
