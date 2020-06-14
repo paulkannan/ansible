@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+   - name: copy a file
+     copy: 
+      src: /home/faith/Downloads/a.txt
+      dest: /tmp
+      mode: 0777
