@@ -1,7 +1,9 @@
 ---
-- name: Install nginx for centos 7
+- name: Install nginx
   hosts: all
   become: true
+  vars:
+    ansible_sudo_pass: centos
 
   tasks:
   - name: Add epel-release repo
@@ -18,8 +20,12 @@
     template:
       src: index.html
       dest: /usr/share/nginx/html/index.html
+    
+    notify:
+     - restart_nginx
 
-  - name: Start NGiNX
-    service:
+  handlers:
+   - name: restart_nginx
+     service:
       name: nginx
-      state: started
+      state: restarted
