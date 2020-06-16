@@ -20,12 +20,16 @@
     template:
       src: index.html
       dest: /usr/share/nginx/html/index.html
-    
+  
+  - name: start nginx
+    service:
+     name: nginx
+     state: restarted
     notify:
-     - restart_nginx
+      - restart_nginx
 
   handlers:
-   - name: restart_nginx
-     service:
+  - name: restart_nginx
+    service:
       name: nginx
       state: restarted
